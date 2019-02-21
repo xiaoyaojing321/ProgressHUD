@@ -16,7 +16,7 @@
 {
 	UIWindow *window;
 	UIView *viewBackground;
-	UIToolbar *toolbarHUD;
+	UIView *toolbarHUD;
 	UIActivityIndicatorView *spinner;
 	UIImageView *imageView;
 	UILabel *labelStatus;
@@ -151,10 +151,11 @@
 	self = [super initWithFrame:[[UIScreen mainScreen] bounds]];
 	//---------------------------------------------------------------------------------------------------------------------------------------------
 	self.statusFont			= [UIFont boldSystemFontOfSize:16];
-	self.statusColor		= [UIColor blackColor];
-	self.spinnerColor		= [UIColor grayColor];
-	self.hudColor			= [UIColor colorWithWhite:0.0 alpha:0.1];
-	self.backgroundColor	= [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.2];
+	self.statusColor		= [UIColor whiteColor];
+    UIColor *tintColor = [UIColor colorWithRed:255.f / 255.f green:167.f / 255.f blue:0.f / 255.f alpha:1.0];
+	self.spinnerColor		= tintColor;
+	self.hudColor			= [[UIColor blackColor] colorWithAlphaComponent:0.8];
+	self.backgroundColor	= [UIColor clearColor];
 	NSBundle *bundle		= [NSBundle bundleForClass:[self class]];
 	self.imageSuccess		= [UIImage imageNamed:@"ProgressHUD.bundle/progresshud-success" inBundle:bundle compatibleWithTraitCollection:nil];
 	self.imageError			= [UIImage imageNamed:@"ProgressHUD.bundle/progresshud-error" inBundle:bundle compatibleWithTraitCollection:nil];
@@ -180,8 +181,8 @@
 {
 	if (toolbarHUD == nil)
 	{
-		toolbarHUD = [[UIToolbar alloc] initWithFrame:CGRectZero];
-		toolbarHUD.translucent = YES;
+		toolbarHUD = [[UIView alloc] initWithFrame:CGRectZero];
+		
 		toolbarHUD.backgroundColor = self.hudColor;
 		toolbarHUD.layer.cornerRadius = 10;
 		toolbarHUD.layer.masksToBounds = YES;
